@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="supMobstockinMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.Mobstockin" >
+    <id column="invoiceId" property="invoiceid" jdbcType="VARCHAR" />
+    <result column="supplierId" property="supplierid" jdbcType="VARCHAR" />
+    <result column="mobTypeId" property="mobtypeid" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="config" property="config" jdbcType="VARCHAR" />
+    <result column="buyPrice" property="buyprice" jdbcType="DECIMAL" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="totalMoney" property="totalmoney" jdbcType="DECIMAL" />
+    <result column="inputUserId" property="inputuserid" jdbcType="CHAR" />
+    <result column="inputDate" property="inputdate"  />
+    <result column="checkDated" property="checkdated"  />
+    <result column="checkUserId" property="checkuserid" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="orgId" property="orgid" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    invoiceId, supplierId, mobTypeId, color, config, buyPrice, amount, totalMoney, inputUserId, 
+    inputDate, checkDated, checkUserId, status, remark, orgId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sup_mobstockin
+    where invoiceId = #{invoiceid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sup_mobstockin
+    where invoiceId = #{invoiceid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.Mobstockin" >
+    insert into sup_mobstockin (invoiceId, supplierId, mobTypeId, 
+      color, config, buyPrice, 
+      amount, totalMoney, inputUserId, 
+      inputDate, checkDated, checkUserId, 
+      status, remark, orgId)
+    values (#{invoiceid,jdbcType=VARCHAR}, #{supplierid,jdbcType=VARCHAR}, #{mobtypeid,jdbcType=VARCHAR}, 
+      #{color,jdbcType=VARCHAR}, #{config,jdbcType=VARCHAR}, #{buyprice,jdbcType=DECIMAL}, 
+      #{amount,jdbcType=DECIMAL}, #{totalmoney,jdbcType=DECIMAL}, #{inputuserid,jdbcType=CHAR}, 
+      #{inputdate}, #{checkdated}, #{checkuserid,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{orgid,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.Mobstockin" >
+    insert into sup_mobstockin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
+        invoiceId,
+      </if>
+      <if test="supplierid != null" >
+        supplierId,
+      </if>
+      <if test="mobtypeid != null" >
+        mobTypeId,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="config != null" >
+        config,
+      </if>
+      <if test="buyprice != null" >
+        buyPrice,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="totalmoney != null" >
+        totalMoney,
+      </if>
+      <if test="inputuserid != null" >
+        inputUserId,
+      </if>
+      <if test="inputdate != null" >
+        inputDate,
+      </if>
+      <if test="checkdated != null" >
+        checkDated,
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="orgid != null" >
+        orgId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
+        #{invoiceid,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierid != null" >
+        #{supplierid,jdbcType=VARCHAR},
+      </if>
+      <if test="mobtypeid != null" >
+        #{mobtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="config != null" >
+        #{config,jdbcType=VARCHAR},
+      </if>
+      <if test="buyprice != null" >
+        #{buyprice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalmoney != null" >
+        #{totalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="inputuserid != null" >
+        #{inputuserid,jdbcType=CHAR},
+      </if>
+      <if test="inputdate != null" >
+        #{inputdate},
+      </if>
+      <if test="checkdated != null" >
+        #{checkdated},
+      </if>
+      <if test="checkuserid != null" >
+        #{checkuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.Mobstockin" >
+    update sup_mobstockin
+    <set >
+      <if test="supplierid != null" >
+        supplierId = #{supplierid,jdbcType=VARCHAR},
+      </if>
+      <if test="mobtypeid != null" >
+        mobTypeId = #{mobtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="config != null" >
+        config = #{config,jdbcType=VARCHAR},
+      </if>
+      <if test="buyprice != null" >
+        buyPrice = #{buyprice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalmoney != null" >
+        totalMoney = #{totalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="inputuserid != null" >
+        inputUserId = #{inputuserid,jdbcType=CHAR},
+      </if>
+      <if test="inputdate != null" >
+        inputDate = #{inputdate},
+      </if>
+      <if test="checkdated != null" >
+        checkDated = #{checkdated},
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId = #{checkuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        orgId = #{orgid,jdbcType=CHAR},
+      </if>
+    </set>
+    where invoiceId = #{invoiceid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.Mobstockin" >
+    update sup_mobstockin
+    set supplierId = #{supplierid,jdbcType=VARCHAR},
+      mobTypeId = #{mobtypeid,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      config = #{config,jdbcType=VARCHAR},
+      buyPrice = #{buyprice,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      totalMoney = #{totalmoney,jdbcType=DECIMAL},
+      inputUserId = #{inputuserid,jdbcType=CHAR},
+      inputDate = #{inputdate},
+      checkDated = #{checkdated},
+      checkUserId = #{checkuserid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      orgId = #{orgid,jdbcType=CHAR}
+    where invoiceId = #{invoiceid,jdbcType=VARCHAR}
+  </update>
+  <select id="queryList" resultType="com.sise.pojo.Mobstockin">
+  	select * from sup_mobstockin order by inputDate desc;
+  </select>
+  
+  <select id="findMobStockIn" parameterType="map" resultType="com.sise.pojo.Mobstockin" >
+  	select * from sup_mobstockin
+  	<where>
+  		<if test="supplierid != ''">
+  			and supplierId LIKE #{supplierid}
+  		</if>
+  		<if test="mobtypeid != ''">
+  			 and mobTypeId LIKE #{mobtypeid}
+  		</if>
+  	</where>
+  	order by inputDate desc
+  </select>
+  
+  <select id="findAllWithFy" parameterType="map" resultType="com.sise.pojo.Mobstockin">
+		select * from sup_mobstockin  
+		<where>
+			<if test="supplierid != null">
+	  			and supplierId LIKE #{supplierid}
+	  		</if>
+	  		<if test="mobtypeid != null">
+	  			 and mobTypeId LIKE #{mobtypeid}
+	  		</if>
+		</where>
+		limit #{pstart},#{psize}
+	</select>
+	
+	<select id="getPageLong" resultType="Integer">
+		select count(*) from sup_mobstockin;
+	</select>
+	
+	
+</mapper>

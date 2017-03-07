@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mobtypeMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.Mobtype" >
+    <id column="mobTypeId" property="mobtypeid" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="mobTypeName" property="mobtypename" jdbcType="VARCHAR" />
+    <result column="buyPrice" property="buyprice" jdbcType="FLOAT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mobTypeId, brand, mobTypeName, buyPrice, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_mobtype
+    where mobTypeId = #{mobtypeid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bas_mobtype
+    where mobTypeId = #{mobtypeid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.Mobtype" >
+    insert into bas_mobtype (mobTypeId, brand, mobTypeName, 
+      buyPrice, remark)
+    values (#{mobtypeid,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{mobtypename,jdbcType=VARCHAR}, 
+      #{buyprice,jdbcType=FLOAT}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.Mobtype" >
+    insert into bas_mobtype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mobtypeid != null" >
+        mobTypeId,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="mobtypename != null" >
+        mobTypeName,
+      </if>
+      <if test="buyprice != null" >
+        buyPrice,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mobtypeid != null" >
+        #{mobtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="mobtypename != null" >
+        #{mobtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="buyprice != null" >
+        #{buyprice,jdbcType=FLOAT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.Mobtype" >
+    update bas_mobtype
+    <set >
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="mobtypename != null" >
+        mobTypeName = #{mobtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="buyprice != null" >
+        buyPrice = #{buyprice,jdbcType=FLOAT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mobTypeId = #{mobtypeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.Mobtype" >
+    update bas_mobtype
+    set brand = #{brand,jdbcType=VARCHAR},
+      mobTypeName = #{mobtypename,jdbcType=VARCHAR},
+      buyPrice = #{buyprice,jdbcType=FLOAT},
+      remark = #{remark,jdbcType=VARCHAR}
+    where mobTypeId = #{mobtypeid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="queryList" parameterType="Map" resultMap="BaseResultMap">
+  	select * from bas_mobtype
+  	<where>
+  	<if test="mobtypeid != ''">
+  	    mobTypeId = '${mobtypeid}'
+  	</if>
+  	</where>
+  </select>
+  
+  <select id="findMobTypeByBrand" parameterType="Map" resultMap="BaseResultMap">
+  	select * from bas_mobtype where brand=#{brand}
+  	
+  </select>
+  <select id="findMobtypeBySelected" parameterType="Map" resultType="com.sise.pojo.Mobtype">
+  	select * from bas_mobtype
+  	<where>
+  	  <if test="brand != null" >
+		brand LIKE #{brand}
+      </if>
+      <if test="mobtypename != ''" >
+        and  mobTypeName LIKE #{mobtypename}
+      </if>
+  	</where>
+  </select>
+</mapper>

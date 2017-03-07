@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="accessorytypeMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.Accessorytype" >
+    <id column="accessoryTypeId" property="accessorytypeid" jdbcType="VARCHAR" />
+    <result column="typeName" property="typename" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="spec" property="spec" jdbcType="VARCHAR" />
+    <result column="manufacturer" property="manufacturer" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    accessoryTypeId, typeName, unit, spec, manufacturer, remark, brand
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_accessorytype
+    where accessoryTypeId = #{accessorytypeid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bas_accessorytype
+    where accessoryTypeId = #{accessorytypeid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.Accessorytype" >
+    insert into bas_accessorytype (accessoryTypeId, typeName, unit, 
+      spec, manufacturer, remark, 
+      brand)
+    values (#{accessorytypeid,jdbcType=VARCHAR}, #{typename,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{spec,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.Accessorytype" >
+    insert into bas_accessorytype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accessorytypeid != null" >
+        accessoryTypeId,
+      </if>
+      <if test="typename != null" >
+        typeName,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="spec != null" >
+        spec,
+      </if>
+      <if test="manufacturer != null" >
+        manufacturer,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accessorytypeid != null" >
+        #{accessorytypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="typename != null" >
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null" >
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null" >
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.Accessorytype" >
+    update bas_accessorytype
+    <set >
+      <if test="typename != null" >
+        typeName = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null" >
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null" >
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where accessoryTypeId = #{accessorytypeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.Accessorytype" >
+    update bas_accessorytype
+    set typeName = #{typename,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      spec = #{spec,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR}
+    where accessoryTypeId = #{accessorytypeid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getTypeList" resultType="com.sise.pojo.Accessorytype">
+  	select * from bas_accessorytype;
+  </select>
+  
+  <select id="findAccessoryType" resultMap="BaseResultMap">
+  	select * from bas_accessorytype
+  	<where>
+  		<if test="brand != null">
+  			and brand LIKE #{brand}
+  		</if>
+  		<if test="typename != ''">
+  			 and typeName LIKE #{typename}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="findAccTypeByBrand" parameterType="Map" resultMap="BaseResultMap">
+  	select * from bas_accessorytype where brand=#{brand}
+  	
+  </select>
+  
+   <select id="findaccTypeByselected" parameterType="map" resultType="com.sise.pojo.Mobstockin" >
+  	select * from bas_accessorytype
+  	<where>
+  		<if test="brand != ''">
+  			and brand LIKE #{brand}
+  		</if>
+  		 <if test="accessoryTypeId != ''">
+  			 and accessoryTypeId LIKE #{accessoryTypeId}
+  		</if>
+  	</where>
+  </select>
+</mapper>

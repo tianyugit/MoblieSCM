@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bonustypeMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.Bonustype" >
+    <id column="bonusTypeId" property="bonustypeid" jdbcType="CHAR" />
+    <result column="tyoeName" property="tyoename" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bonusTypeId, tyoeName, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_bonustype
+    where bonusTypeId = #{bonustypeid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Map" >
+    delete from bas_bonustype
+    where bonusTypeId = #{bonustypeid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.Bonustype" >
+    insert into bas_bonustype (bonusTypeId, tyoeName, remark
+      )
+    values (#{bonustypeid,jdbcType=CHAR}, #{tyoename,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.Bonustype" >
+    insert into bas_bonustype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bonustypeid != null" >
+        bonusTypeId,
+      </if>
+      <if test="tyoename != null" >
+        tyoeName,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bonustypeid != null" >
+        #{bonustypeid,jdbcType=CHAR},
+      </if>
+      <if test="tyoename != null" >
+        #{tyoename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.Bonustype" >
+    update bas_bonustype
+    <set >
+      <if test="tyoename != null" >
+        tyoeName = #{tyoename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bonusTypeId = #{bonustypeid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.Bonustype" >
+    update bas_bonustype
+    set tyoeName = #{tyoename,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where bonusTypeId = #{bonustypeid,jdbcType=CHAR}
+  </update>
+  
+  <select id="queryList" resultType="com.sise.pojo.Bonustype">
+  	select * from bas_bonustype;
+  </select>
+  
+   <select id="findIdByName" parameterType="String" resultType="com.sise.pojo.Bonustype">
+  	select * from bas_bonustype where tyoename=#{string};
+  </select>
+  
+</mapper>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="custTradedetailMapper" >
+ <resultMap id="BaseResultMap" type="com.sise.pojo.CustTradedetail" >
+    <id column="invoiceId" property="invoiceid" jdbcType="CHAR" />
+    <result column="supplierId" property="supplierid" jdbcType="VARCHAR" />
+    <result column="tradeType" property="tradetype" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="unitPrice" property="unitprice" jdbcType="DECIMAL" />
+    <result column="inputUserId" property="inputuserid" jdbcType="VARCHAR" />
+    <result column="inputDate" property="inputdate"  />
+    <result column="checkUserId" property="checkuserid" jdbcType="VARCHAR" />
+    <result column="checkDate" property="checkdate"  />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="totalMoney" property="totalmoney" jdbcType="DECIMAL" />
+    <result column="orgId" property="orgid" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    invoiceId, supplierId, tradeType, amount, type, unitPrice, inputUserId, inputDate, 
+    checkUserId, checkDate, status, totalMoney, orgId, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cust_tradedetail
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cust_tradedetail
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.CustTradedetail" >
+    insert into cust_tradedetail (invoiceId, supplierId, tradeType, 
+      amount, type, unitPrice, 
+      inputUserId, inputDate, checkUserId, 
+      checkDate, status, totalMoney, 
+      orgId, remark)
+    values (#{invoiceid,jdbcType=CHAR}, #{supplierid,jdbcType=VARCHAR}, #{tradetype,jdbcType=INTEGER}, 
+      #{amount,jdbcType=DECIMAL}, #{type,jdbcType=CHAR}, #{unitprice,jdbcType=DECIMAL}, 
+      #{inputuserid,jdbcType=VARCHAR}, #{inputdate,jdbcType=TIMESTAMP}, #{checkuserid,jdbcType=VARCHAR}, 
+      #{checkdate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{totalmoney,jdbcType=DECIMAL}, 
+      #{orgid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.CustTradedetail" >
+    insert into cust_tradedetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
+        invoiceId,
+      </if>
+      <if test="supplierid != null" >
+        supplierId,
+      </if>
+      <if test="tradetype != null" >
+        tradeType,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="unitprice != null" >
+        unitPrice,
+      </if>
+      <if test="inputuserid != null" >
+        inputUserId,
+      </if>
+      <if test="inputdate != null" >
+        inputDate,
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId,
+      </if>
+      <if test="checkdate != null" >
+        checkDate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="totalmoney != null" >
+        totalMoney,
+      </if>
+      <if test="orgid != null" >
+        orgId,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
+        #{invoiceid,jdbcType=CHAR},
+      </if>
+      <if test="supplierid != null" >
+        #{supplierid,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetype != null" >
+        #{tradetype,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="unitprice != null" >
+        #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="inputuserid != null" >
+        #{inputuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="inputdate != null" >
+        #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuserid != null" >
+        #{checkuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="checkdate != null" >
+        #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="totalmoney != null" >
+        #{totalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.CustTradedetail" >
+    update cust_tradedetail
+    <set >
+      <if test="supplierid != null" >
+        supplierId = #{supplierid,jdbcType=VARCHAR},
+      </if>
+      <if test="tradetype != null" >
+        tradeType = #{tradetype,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="unitprice != null" >
+        unitPrice = #{unitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="inputuserid != null" >
+        inputUserId = #{inputuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="inputdate != null" >
+        inputDate = #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId = #{checkuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="checkdate != null" >
+        checkDate = #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="totalmoney != null" >
+        totalMoney = #{totalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="orgid != null" >
+        orgId = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.CustTradedetail" >
+    update cust_tradedetail
+    set supplierId = #{supplierid,jdbcType=VARCHAR},
+      tradeType = #{tradetype,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      type = #{type,jdbcType=CHAR},
+      unitPrice = #{unitprice,jdbcType=DECIMAL},
+      inputUserId = #{inputuserid,jdbcType=VARCHAR},
+      inputDate = #{inputdate,jdbcType=TIMESTAMP},
+      checkUserId = #{checkuserid,jdbcType=VARCHAR},
+      checkDate = #{checkdate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      totalMoney = #{totalmoney,jdbcType=DECIMAL},
+      orgId = #{orgid,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </update>
+  <select id="queryList" resultType="com.sise.pojo.CustTradedetail">
+  	select * from cust_tradedetail
+  </select>
+  
+  <select id="findAllWithFy" parameterType="map" resultType="com.sise.pojo.CustTradedetail">
+		select * from cust_tradedetail where inputDate between #{startDate} and #{endDate} order by inputDate desc limit #{pstart},#{psize}
+	</select>
+	
+	<select id="getPageLong" resultType="Integer">
+		select count(*) from cust_tradedetail;
+	</select>
+</mapper>

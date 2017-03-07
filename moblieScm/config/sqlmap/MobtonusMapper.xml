@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mobtonusMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.MobTonus" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="mobTypeId" property="mobTypeId" jdbcType="VARCHAR" />
+    <result column="bonusTypeId" property="bonusTypeId" jdbcType="CHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mobTypeId, bonusTypeId, money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_mobtonus
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bas_mobtonus
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.MobTonus" >
+    insert into bas_mobtonus (id, mobTypeId, bonusTypeId, 
+      money)
+    values (#{id,jdbcType=CHAR}, #{mobTypeId,jdbcType=VARCHAR}, #{bonusTypeId,jdbcType=CHAR}, 
+      #{money,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.MobTonus" >
+    insert into bas_mobtonus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mobTypeId != null" >
+        mobTypeId,
+      </if>
+      <if test="bonusTypeId != null" >
+        bonusTypeId,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="mobTypeId != null" >
+        #{mobTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusTypeId != null" >
+        #{bonusTypeId,jdbcType=CHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.MobTonus" >
+    update bas_mobtonus
+    <set >
+      <if test="mobTypeId != null" >
+        mobTypeId = #{mobTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusTypeId != null" >
+        bonusTypeId = #{bonusTypeId,jdbcType=CHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.MobTonus" >
+    update bas_mobtonus
+    set mobTypeId = #{mobTypeId,jdbcType=VARCHAR},
+      bonusTypeId = #{bonusTypeId,jdbcType=CHAR},
+      money = #{money,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  
+  <select id="queryList" parameterType="String" resultType="com.sise.pojo.MobTonus">
+  	select * from bas_mobtonus where mobTypeId = #{mobTypeId,jdbcType=VARCHAR};
+  </select>
+  <delete id="deleteByMobtypeid"  parameterType="String">
+  	delete from bas_mobtonus
+    where mobTypeId = #{mobtypeid,jdbcType=VARCHAR}
+  </delete>
+  <!-- <select id="queryList" resultType="com.sise.pojo.MobTonus">
+   select * from bas_bonustype where mobTypeId
+  </select> -->
+</mapper>

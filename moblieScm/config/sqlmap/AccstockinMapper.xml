@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="accstockinMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.Accstockin" >
+    <id column="invoiceId" property="invoiceid" jdbcType="CHAR" />
+    <result column="supplierId" property="supplierid" jdbcType="VARCHAR" />
+    <result column="accessoryTypeId" property="accessorytypeid" jdbcType="CHAR" />
+    <result column="brand" property="brand" jdbcType="CHAR" />
+    <result column="buyPrice" property="buyprice" jdbcType="DECIMAL" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="totalMoney" property="totalmoney" jdbcType="DECIMAL" />
+    <result column="inputUserId" property="inputuserid" jdbcType="CHAR" />
+    <result column="inputDate" property="inputdate" />
+    <result column="checkUserId" property="checkuserid" jdbcType="CHAR" />
+    <result column="checkDate" property="checkdate"  />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    invoiceId, supplierId, accessoryTypeId, brand, buyPrice, amount, totalMoney, inputUserId, 
+    inputDate, checkUserId, checkDate, status, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sup_accstockin
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sup_accstockin
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.Accstockin" >
+    insert into sup_accstockin (invoiceId, supplierId, accessoryTypeId, 
+      brand, buyPrice, amount, 
+      totalMoney, inputUserId, inputDate, 
+      checkUserId, checkDate, status, 
+      remark)
+    values (#{invoiceid,jdbcType=CHAR}, #{supplierid,jdbcType=VARCHAR}, #{accessorytypeid,jdbcType=CHAR}, 
+      #{brand,jdbcType=CHAR}, #{buyprice,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
+      #{totalmoney,jdbcType=DECIMAL}, #{inputuserid,jdbcType=CHAR}, #{inputdate,jdbcType=TIMESTAMP}, 
+      #{checkuserid,jdbcType=CHAR}, #{checkdate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.Accstockin" >
+    insert into sup_accstockin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
+        invoiceId,
+      </if>
+      <if test="supplierid != null" >
+        supplierId,
+      </if>
+      <if test="accessorytypeid != null" >
+        accessoryTypeId,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="buyprice != null" >
+        buyPrice,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="totalmoney != null" >
+        totalMoney,
+      </if>
+      <if test="inputuserid != null" >
+        inputUserId,
+      </if>
+      <if test="inputdate != null" >
+        inputDate,
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId,
+      </if>
+      <if test="checkdate != null" >
+        checkDate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
+        #{invoiceid,jdbcType=CHAR},
+      </if>
+      <if test="supplierid != null" >
+        #{supplierid,jdbcType=VARCHAR},
+      </if>
+      <if test="accessorytypeid != null" >
+        #{accessorytypeid,jdbcType=CHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=CHAR},
+      </if>
+      <if test="buyprice != null" >
+        #{buyprice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalmoney != null" >
+        #{totalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="inputuserid != null" >
+        #{inputuserid,jdbcType=CHAR},
+      </if>
+      <if test="inputdate != null" >
+        #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuserid != null" >
+        #{checkuserid,jdbcType=CHAR},
+      </if>
+      <if test="checkdate != null" >
+        #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.Accstockin" >
+    update sup_accstockin
+    <set >
+      <if test="supplierid != null" >
+        supplierId = #{supplierid,jdbcType=VARCHAR},
+      </if>
+      <if test="accessorytypeid != null" >
+        accessoryTypeId = #{accessorytypeid,jdbcType=CHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=CHAR},
+      </if>
+      <if test="buyprice != null" >
+        buyPrice = #{buyprice,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalmoney != null" >
+        totalMoney = #{totalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="inputuserid != null" >
+        inputUserId = #{inputuserid,jdbcType=CHAR},
+      </if>
+      <if test="inputdate != null" >
+        inputDate = #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId = #{checkuserid,jdbcType=CHAR},
+      </if>
+      <if test="checkdate != null" >
+        checkDate = #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.Accstockin" >
+    update sup_accstockin
+    set supplierId = #{supplierid,jdbcType=VARCHAR},
+      accessoryTypeId = #{accessorytypeid,jdbcType=CHAR},
+      brand = #{brand,jdbcType=CHAR},
+      buyPrice = #{buyprice,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      totalMoney = #{totalmoney,jdbcType=DECIMAL},
+      inputUserId = #{inputuserid,jdbcType=CHAR},
+      inputDate = #{inputdate,jdbcType=TIMESTAMP},
+      checkUserId = #{checkuserid,jdbcType=CHAR},
+      checkDate = #{checkdate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </update>
+  <select id="getList" resultType="com.sise.pojo.Accstockin">
+  	select * from sup_accstockin;
+  </select>
+  
+  <select id="getaccTypeByMap" parameterType="map" resultType="com.sise.pojo.Accstockin" >
+  	select * from sup_accstockin
+  	<where>
+  		<if test="brand != ''">
+  			and brand LIKE #{brand}
+  		</if>
+  		 <if test="accessoryTypeId != ''">
+  			 and accessoryTypeId LIKE #{accessoryTypeId}
+  		</if>
+  	</where>
+  	</select>
+  	
+  	<select id="findAllWithFy" parameterType="map" resultType="com.sise.pojo.Accstockin">
+		select * from sup_accstockin  limit #{pstart},#{psize}
+	</select>
+	
+	<select id="getPageLong" resultType="Integer">
+		select count(*) from sup_accstockin;
+	</select>
+</mapper>

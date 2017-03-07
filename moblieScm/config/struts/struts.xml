@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<include file="struts/struts-supplier.xml"></include>
+    <constant name="struts.action.extension" value="do" />
+	<!-- <constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/> -->
+	<!-- 替换默认的产生动作类实例的工厂为Spring的 -->
+<!-- 	<constant name="struts.objectFactory" value="spring"></constant> -->
+	<package name="default" namespace="/" extends="supplier">
+	
+		<!-- <action name="welcome">
+			<result>/WEB-INF/jsp/MyJsp.jsp</result>
+		</action>
+		<action name="showname"
+			class="com.test.action.TestAction">
+			<result name="ret">/WEB-INF/jsp/index2.jsp</result>
+		</action> -->
+		<action name="start">
+			<result>/WEB-INF/jsp/user_login.jsp</result>
+		</action>
+		<action name="userLogin" class="com.sise.action.UserLoginAction">
+			<result name="login">/WEB-INF/jsp/user_login.jsp</result>
+			<result name="success">/WEB-INF/jsp/home.jsp</result>
+			
+		</action>
+		
+		<action name="logout" class="com.sise.action.UserLoginAction" method="logout">
+			<result name="success">/WEB-INF/jsp/home.jsp</result>
+		</action>
+		
+		<action name="home_*" class="com.sise.action.HomeAction" method="{1}">
+			<result name="success">/WEB-INF/jsp/home.jsp</result>
+			<result name="login">/WEB-INF/jsp/user_login.jsp</result>
+			<result name="left">/WEB-INF/jsp/home_dataShow_left.jsp</result>
+			<result name="right">/WEB-INF/jsp/home_dataShow_right.jsp</result>
+		</action>
+		
+		<action name="regist" >
+			<result>/WEB-INF/jsp/regist.jsp</result>
+		</action>
+		
+		<action name="warn" >
+			<result>/WEB-INF/jsp/warn/warn.jsp</result>
+		</action>
+		
+		<action name="warn2" >
+			<result>/WEB-INF/jsp/warn/warn2.jsp</result>
+		</action>
+		
+		<action name="user_*" class="com.sise.action.UserManageAction" method="{1}">
+			<result name="edit">/WEB-INF/jsp/user/user_edit.jsp</result>
+			<result name="add">/WEB-INF/jsp/user/user_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/user/user_list.jsp</result> 	
+		</action>
+		
+		<action name="userManage_addUser" class="com.sise.action.UserRegistAction" method="addUser">
+			<result name="regist">/WEB-INF/jsp/regist.jsp</result>
+			<result name="success">/WEB-INF/jsp/user_login.jsp</result>
+		</action>
+		
+		<action name="test">
+		<result>/WEB-INF/jsp/user/user_list.jsp</result>
+		</action>
+	</package>
+</struts>

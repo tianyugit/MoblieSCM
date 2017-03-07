@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mobreturnMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.SupMobreturn" >
+    <id column="invoiceId" property="invoiceid" jdbcType="CHAR" />
+    <result column="supplierId" property="supplierid" jdbcType="CHAR" />
+    <result column="mobTypeId" property="mobtypeid" jdbcType="CHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="returnPrice" property="returnprice" jdbcType="DECIMAL" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="inputUserId" property="inputuserid" jdbcType="CHAR" />
+    <result column="inputDate" property="inputdate" />
+    <result column="checkUserId" property="checkuserid" jdbcType="CHAR" />
+    <result column="checkDate" property="checkdate" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="orgId" property="orgid" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    invoiceId, supplierId, mobTypeId, amount, returnPrice, money, inputUserId, inputDate, 
+    checkUserId, checkDate, remark, status, orgId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sup_mobreturn
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sup_mobreturn
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.SupMobreturn" >
+    insert into sup_mobreturn (invoiceId, supplierId, mobTypeId, 
+      amount, returnPrice, money, 
+      inputUserId, inputDate, checkUserId, 
+      checkDate, remark, status, 
+      orgId)
+    values (#{invoiceid,jdbcType=CHAR}, #{supplierid,jdbcType=CHAR}, #{mobtypeid,jdbcType=CHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{returnprice,jdbcType=DECIMAL}, #{money,jdbcType=DECIMAL}, 
+      #{inputuserid,jdbcType=CHAR}, #{inputdate,jdbcType=TIMESTAMP}, #{checkuserid,jdbcType=CHAR}, 
+      #{checkdate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{orgid,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.SupMobreturn" >
+    insert into sup_mobreturn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
+        invoiceId,
+      </if>
+      <if test="supplierid != null" >
+        supplierId,
+      </if>
+      <if test="mobtypeid != null" >
+        mobTypeId,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="returnprice != null" >
+        returnPrice,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="inputuserid != null" >
+        inputUserId,
+      </if>
+      <if test="inputdate != null" >
+        inputDate,
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId,
+      </if>
+      <if test="checkdate != null" >
+        checkDate,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="orgid != null" >
+        orgId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
+        #{invoiceid,jdbcType=CHAR},
+      </if>
+      <if test="supplierid != null" >
+        #{supplierid,jdbcType=CHAR},
+      </if>
+      <if test="mobtypeid != null" >
+        #{mobtypeid,jdbcType=CHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="returnprice != null" >
+        #{returnprice,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="inputuserid != null" >
+        #{inputuserid,jdbcType=CHAR},
+      </if>
+      <if test="inputdate != null" >
+        #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuserid != null" >
+        #{checkuserid,jdbcType=CHAR},
+      </if>
+      <if test="checkdate != null" >
+        #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.SupMobreturn" >
+    update sup_mobreturn
+    <set >
+      <if test="supplierid != null" >
+        supplierId = #{supplierid,jdbcType=CHAR},
+      </if>
+      <if test="mobtypeid != null" >
+        mobTypeId = #{mobtypeid,jdbcType=CHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="returnprice != null" >
+        returnPrice = #{returnprice,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="inputuserid != null" >
+        inputUserId = #{inputuserid,jdbcType=CHAR},
+      </if>
+      <if test="inputdate != null" >
+        inputDate = #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId = #{checkuserid,jdbcType=CHAR},
+      </if>
+      <if test="checkdate != null" >
+        checkDate = #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        orgId = #{orgid,jdbcType=CHAR},
+      </if>
+    </set>
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.SupMobreturn" >
+    update sup_mobreturn
+    set supplierId = #{supplierid,jdbcType=CHAR},
+      mobTypeId = #{mobtypeid,jdbcType=CHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      returnPrice = #{returnprice,jdbcType=DECIMAL},
+      money = #{money,jdbcType=DECIMAL},
+      inputUserId = #{inputuserid,jdbcType=CHAR},
+      inputDate = #{inputdate,jdbcType=TIMESTAMP},
+      checkUserId = #{checkuserid,jdbcType=CHAR},
+      checkDate = #{checkdate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      orgId = #{orgid,jdbcType=CHAR}
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </update>
+  <select id="queryList" resultType="com.sise.pojo.SupMobreturn">
+   select * from sup_mobreturn
+  </select>
+  
+  	<select id="findAllWithFy" parameterType="map" resultType="com.sise.pojo.SupMobreturn">
+		select * from sup_mobreturn  limit #{pstart},#{psize}
+	</select>
+	
+	<select id="getPageLong" resultType="Integer">
+		select count(*) from sup_mobreturn;
+	</select>
+</mapper>

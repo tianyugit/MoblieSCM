@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="accstockMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.AccStock" >
+    <id column="sn" property="sn" jdbcType="CHAR" />
+    <result column="brand" property="brand" jdbcType="CHAR" />
+    <result column="accessoryTypeId" property="accessorytypeid" jdbcType="CHAR" />
+    <result column="fristSupplierId" property="fristsupplierid" jdbcType="CHAR" />
+    <result column="firstInTime" property="firstintime" />
+    <result column="lastSupplierId" property="lastsupplierid" jdbcType="CHAR" />
+    <result column="lastInTime" property="lastintime"/>
+    <result column="buyPrice" property="buyprice" jdbcType="DECIMAL" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="lossAmount" property="lossamount" jdbcType="DECIMAL"/>
+    <result column="orgId" property="orgid" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap type="com.sise.pojo.StoCount" id="countAccTypeMap">
+	   <result column="accessoryTypeId" property="accessorytypeid" />
+	   <result column="amount" property="amount"/>
+	   <result column="cost" property="cost"/>
+	   <result column="buyprice" property="buyprice"/>
+	   <result column="lossamount" property="lossamount"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sn, brand, accessoryTypeId, fristSupplierId, firstInTime, lastSupplierId, lastInTime, 
+    buyPrice, cost, lossAmount, orgId, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sup_accstock
+    where sn = #{sn,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sup_accstock
+    where sn = #{sn,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.AccStock" >
+    insert into sup_accstock (sn, brand, accessoryTypeId, 
+      fristSupplierId, firstInTime, lastSupplierId, 
+      lastInTime, buyPrice, cost, 
+      lossAmount, orgId, status
+      )
+    values (#{sn,jdbcType=CHAR}, #{brand,jdbcType=CHAR}, #{accessorytypeid,jdbcType=CHAR}, 
+      #{fristsupplierid,jdbcType=CHAR}, #{firstintime,jdbcType=TIMESTAMP}, #{lastsupplierid,jdbcType=CHAR}, 
+      #{lastintime,jdbcType=TIMESTAMP}, #{buyprice,jdbcType=DECIMAL}, #{cost,jdbcType=DECIMAL}, 
+      #{lossamount,jdbcType=CHAR}, #{orgid,jdbcType=CHAR}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.AccStock" >
+    insert into sup_accstock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="accessorytypeid != null" >
+        accessoryTypeId,
+      </if>
+      <if test="fristsupplierid != null" >
+        fristSupplierId,
+      </if>
+      <if test="firstintime != null" >
+        firstInTime,
+      </if>
+      <if test="lastsupplierid != null" >
+        lastSupplierId,
+      </if>
+      <if test="lastintime != null" >
+        lastInTime,
+      </if>
+      <if test="buyprice != null" >
+        buyPrice,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="lossamount != null" >
+        lossAmount,
+      </if>
+      <if test="orgid != null" >
+        orgId,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sn != null" >
+        #{sn,jdbcType=CHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=CHAR},
+      </if>
+      <if test="accessorytypeid != null" >
+        #{accessorytypeid,jdbcType=CHAR},
+      </if>
+      <if test="fristsupplierid != null" >
+        #{fristsupplierid,jdbcType=CHAR},
+      </if>
+      <if test="firstintime != null" >
+        #{firstintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastsupplierid != null" >
+        #{lastsupplierid,jdbcType=CHAR},
+      </if>
+      <if test="lastintime != null" >
+        #{lastintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyprice != null" >
+        #{buyprice,jdbcType=DECIMAL},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="lossamount != null" >
+        #{lossamount,jdbcType=CHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.AccStock" >
+    update sup_accstock
+    <set >
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=CHAR},
+      </if>
+      <if test="accessorytypeid != null" >
+        accessoryTypeId = #{accessorytypeid,jdbcType=CHAR},
+      </if>
+      <if test="fristsupplierid != null" >
+        fristSupplierId = #{fristsupplierid,jdbcType=CHAR},
+      </if>
+      <if test="firstintime != null" >
+        firstInTime = #{firstintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastsupplierid != null" >
+        lastSupplierId = #{lastsupplierid,jdbcType=CHAR},
+      </if>
+      <if test="lastintime != null" >
+        lastInTime = #{lastintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyprice != null" >
+        buyPrice = #{buyprice,jdbcType=DECIMAL},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="lossamount != null" >
+        lossAmount = #{lossamount,jdbcType=CHAR},
+      </if>
+      <if test="orgid != null" >
+        orgId = #{orgid,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sn = #{sn,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.AccStock" >
+    update sup_accstock
+    set brand = #{brand,jdbcType=CHAR},
+      accessoryTypeId = #{accessorytypeid,jdbcType=CHAR},
+      fristSupplierId = #{fristsupplierid,jdbcType=CHAR},
+      firstInTime = #{firstintime,jdbcType=TIMESTAMP},
+      lastSupplierId = #{lastsupplierid,jdbcType=CHAR},
+      lastInTime = #{lastintime,jdbcType=TIMESTAMP},
+      buyPrice = #{buyprice,jdbcType=DECIMAL},
+      cost = #{cost,jdbcType=DECIMAL},
+      lossAmount = #{lossamount,jdbcType=CHAR},
+      orgId = #{orgid,jdbcType=CHAR},
+      status = #{status,jdbcType=INTEGER}
+    where sn = #{sn,jdbcType=CHAR}
+  </update>
+  
+  <select id="countAccType" resultType="com.sise.pojo.StoCount">
+  	select accessoryTypeId,count(sn) as amount,avg(buyPrice) as buyprice,avg(cost) as cost,avg(lossamount) lossamount from sup_accstock group by accessoryTypeId;
+  </select>
+  
+  <select id="findmobStockByaccTypeId" parameterType="java.lang.String" resultType="com.sise.pojo.AccStock">
+  		select * from sup_accstock where  accessoryTypeId = #{accessorytypeid}
+  </select>
+</mapper>

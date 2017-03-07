@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="snstockMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.SnStock" >
+    <id column="Id" property="id" jdbcType="CHAR" />
+    <result column="invoiceId" property="invoiceid" jdbcType="CHAR" />
+    <result column="sn" property="sn" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, invoiceId, sn
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sup_snstock
+    where Id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sup_snstock
+    where Id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.SnStock" >
+    insert into sup_snstock (Id, invoiceId, sn)
+    values (#{id,jdbcType=CHAR}, #{invoiceid,jdbcType=CHAR}, #{sn,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.SnStock" >
+    insert into sup_snstock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="invoiceid != null" >
+        invoiceId,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="invoiceid != null" >
+        #{invoiceid,jdbcType=CHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertByMap" parameterType="Map" >
+    insert into sup_snstock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="invoiceid != null" >
+        invoiceId,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="invoiceid != null" >
+        #{invoiceid,jdbcType=CHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.SnStock" >
+    update sup_snstock
+    <set >
+      <if test="invoiceid != null" >
+        invoiceId = #{invoiceid,jdbcType=CHAR},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=CHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.SnStock" >
+    update sup_snstock
+    set invoiceId = #{invoiceid,jdbcType=CHAR},
+      sn = #{sn,jdbcType=CHAR}
+    where Id = #{id,jdbcType=CHAR}
+  </update>
+  
+  
+  <select id="getSnStockinByInvoiceId" parameterType="java.lang.String" resultType="com.sise.pojo.SnStock">
+  	select * from sup_snstock where invoiceId = #{invoiceid}
+  </select>
+  
+  <delete id="deleteByInvoiceId" parameterType="java.lang.String" >
+    delete from sup_snstock
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </delete>
+</mapper>

@@ -1,0 +1,174 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
+
+<!-- 配置SqlSessionFactory -->
+<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<!-- 数据源 -->
+	<property name="dataSource" ref="dataSource"/>
+	<!-- 配置SqlMapConfig.xml -->
+	<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"/>
+</bean>
+
+<!-- 配置userDao -->
+<!--  <bean id="userDao" class="com.test.dao.UserDaoImpl">
+	注入会话工厂
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean> -->
+
+ <bean id="userDao" class="com.sise.dao.UserDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="supplierTypeDao" class="com.sise.dao.SupplierTypeDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="supplierDao" class="com.sise.dao.SupplierDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+
+ <bean id="brandDao" class="com.sise.dao.BrandDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="colorDao" class="com.sise.dao.ColorDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+
+ <bean id="bonustypeDao" class="com.sise.dao.BonustypeDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+
+ <bean id="configDao" class="com.sise.dao.ConfigDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="mobtypeDao" class="com.sise.dao.MobtypeDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="mobtonusDao" class="com.sise.dao.MobtonusDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="customerDao" class="com.sise.dao.CustomerDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="customertypeDao" class="com.sise.dao.CustomertypeDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="accessorytypeDao" class="com.sise.dao.AccessorytypeDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="accountDao" class="com.sise.dao.AccountDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+
+<!-- 供應商業務 -->
+ <bean id="mobstockDao" class="com.sise.dao.sup.MobstockDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="mobstockinDao" class="com.sise.dao.sup.MobstockinDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="supTradedetailDao" class="com.sise.dao.sup.SupTradedetailDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="supStockinsnDao" class="com.sise.dao.sup.SupStockinsnDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="snstockDao" class="com.sise.dao.sup.SnstockDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="accstockDao" class="com.sise.dao.sup.AccstockDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="accstockinDao" class="com.sise.dao.sup.AccstockinDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="paymentDao" class="com.sise.dao.sup.PaymentDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="mobreturnDao" class="com.sise.dao.sup.MobreturnDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="mobstocksnoutDao" class="com.sise.dao.sup.MobstocksnoutDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+<!-- 客户业务 -->
+ <bean id="custMobsaleDao" class="com.sise.dao.cust.CustMobsaleDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="custTradedetailDao" class="com.sise.dao.cust.CustTradedetailDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="custMobsalesnDao" class="com.sise.dao.cust.CustMobsalesnDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="custSaleDao" class="com.sise.dao.cust.CustSaleDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+ <bean id="custPayeeDao" class="com.sise.dao.cust.CustPayeeDaoImpl">
+	<!-- 注入会话工厂 -->
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+</bean>
+
+<!-- mapper动态代理 -->
+<!-- 配置userMapper
+MapperFactoryBean：用于生成 代理对象
+ -->
+<!-- <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+   注入会话工厂
+	<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+	mapper接口
+	<property name="mapperInterface" value="cn.itcast.ssm.dao.mapper.UserMapper"/>
+</bean> -->
+
+<!-- 使用mapper批量扫描器扫描mapper接口
+规则：mapper.xml和mapper.java在一个目录 且同名即可 
+扫描出来mapper，自动让spring容器注册，bean的id就是mapper类名(首字母小写)
+ -->
+<!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"> -->
+	<!-- 会话工厂 -->
+	<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"/> -->
+  <!-- 扫描包路径 
+  多个包中间用半角逗号分隔
+   -->
+	<!-- <property name="basePackage" value="cn.itcast.ssm.dao.mapper"/> -->
+<!-- </bean> -->
+
+
+</beans>

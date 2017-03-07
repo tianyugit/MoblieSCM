@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<setting name="cacheEnabled" value="true"/>
+	</settings>
+
+	<!-- 定义别名 -->
+	<typeAliases>
+		<package name="com.sise.pojo" />
+	</typeAliases>
+	<!-- 配置mapper映射文件 -->
+	
+	<plugins>  
+    <plugin interceptor="com.sise.utils.PageHelper"></plugin>  
+	</plugins>
+
+	<mappers>
+		<!-- 加载 原始dao使用映射文件 -->
+		 <mapper resource="sqlmap/userMapper.xml" />
+		 <mapper resource="sqlmap/supplierMapper.xml" />
+		 <mapper resource="sqlmap/suppliertypeMapper.xml" />
+		 <mapper resource="sqlmap/BrandMapper.xml" />
+		 <mapper resource="sqlmap/ColorMapper.xml" />
+		 <mapper resource="sqlmap/BonustypeMapper.xml" />
+		 <mapper resource="sqlmap/ConfigMapper.xml" />
+		 <mapper resource="sqlmap/MobtypeMapper.xml" />
+		 <mapper resource="sqlmap/CustomerMapper.xml" />
+		 <mapper resource="sqlmap/CustomertypeMapper.xml" />
+		 <mapper resource="sqlmap/MobtonusMapper.xml" />
+		 <mapper resource="sqlmap/AccessorytypeMapper.xml" />
+		 <mapper resource="sqlmap/AccountMapper.xml" />
+		 <!--供应商业务  -->
+		 <mapper resource="sqlmap/MobstockMapper.xml" />
+		 <mapper resource="sqlmap/MobstockinMapper.xml" />
+		 <mapper resource="sqlmap/SupTradedetailMapper.xml" />
+		 <mapper resource="sqlmap/SupStockinsnMapper.xml" />
+		 <mapper resource="sqlmap/AccstockMapper.xml" />
+		 <mapper resource="sqlmap/AccstockinMapper.xml" />
+		 <mapper resource="sqlmap/SnstockMapper.xml" />
+		 <mapper resource="sqlmap/PaymentMapper.xml" />
+		 <mapper resource="sqlmap/MobreturnMapper.xml" />
+		 <mapper resource="sqlmap/MobstocksnoutMapper.xml" />
+		 
+		 <!-- 客户业务 -->
+		 <mapper resource="sqlmap/CustMobsaleMapper.xml" />
+		 <mapper resource="sqlmap/CustTradedetailMapper.xml" />
+		 <mapper resource="sqlmap/CustMobsalesnMapper.xml" />
+		 <mapper resource="sqlmap/CustSaleMapper.xml" />
+		 <mapper resource="sqlmap/CustPayeeMapper.xml" />
+		 
+		
+		<!--批量mapper扫描 遵循规则：将mapper.xml和mapper.java文件放在一个目录 且文件名相同 -->
+		<package name="com.test.dao.mapper" /> 
+	</mappers>
+	
+	
+</configuration>

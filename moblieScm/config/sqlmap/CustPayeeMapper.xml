@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="custPayeeMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.CustPayee" >
+    <id column="invoiceId" property="invoiceid" jdbcType="CHAR" />
+    <result column="custId" property="custid" jdbcType="CHAR" />
+    <result column="cashPayment" property="cashpayment" jdbcType="INTEGER" />
+    <result column="payAccount" property="payaccount" jdbcType="CHAR" />
+    <result column="incomeMoney" property="incomemoney" jdbcType="DECIMAL" />
+    <result column="calculateRebate" property="calculaterebate" jdbcType="INTEGER" />
+    <result column="inputUserId" property="inputuserid" jdbcType="CHAR" />
+    <result column="inputDate" property="inputdate" jdbcType="TIMESTAMP" />
+    <result column="checkUserId" property="checkuserid" jdbcType="CHAR" />
+    <result column="checkDate" property="checkdate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="orgId" property="orgid" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    invoiceId, custId, cashPayment, payAccount, incomeMoney, calculateRebate, inputUserId, 
+    inputDate, checkUserId, checkDate, status, orgId, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cust_payee
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cust_payee
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.CustPayee" >
+    insert into cust_payee (invoiceId, custId, cashPayment, 
+      payAccount, incomeMoney, calculateRebate, 
+      inputUserId, inputDate, checkUserId, 
+      checkDate, status, orgId, 
+      remark)
+    values (#{invoiceid,jdbcType=CHAR}, #{custid,jdbcType=CHAR}, #{cashpayment,jdbcType=INTEGER}, 
+      #{payaccount,jdbcType=CHAR}, #{incomemoney,jdbcType=DECIMAL}, #{calculaterebate,jdbcType=INTEGER}, 
+      #{inputuserid,jdbcType=CHAR}, #{inputdate,jdbcType=TIMESTAMP}, #{checkuserid,jdbcType=CHAR}, 
+      #{checkdate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{orgid,jdbcType=CHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.CustPayee" >
+    insert into cust_payee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
+        invoiceId,
+      </if>
+      <if test="custid != null" >
+        custId,
+      </if>
+      <if test="cashpayment != null" >
+        cashPayment,
+      </if>
+      <if test="payaccount != null" >
+        payAccount,
+      </if>
+      <if test="incomemoney != null" >
+        incomeMoney,
+      </if>
+      <if test="calculaterebate != null" >
+        calculateRebate,
+      </if>
+      <if test="inputuserid != null" >
+        inputUserId,
+      </if>
+      <if test="inputdate != null" >
+        inputDate,
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId,
+      </if>
+      <if test="checkdate != null" >
+        checkDate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="orgid != null" >
+        orgId,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="invoiceid != null" >
+        #{invoiceid,jdbcType=CHAR},
+      </if>
+      <if test="custid != null" >
+        #{custid,jdbcType=CHAR},
+      </if>
+      <if test="cashpayment != null" >
+        #{cashpayment,jdbcType=INTEGER},
+      </if>
+      <if test="payaccount != null" >
+        #{payaccount,jdbcType=CHAR},
+      </if>
+      <if test="incomemoney != null" >
+        #{incomemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="calculaterebate != null" >
+        #{calculaterebate,jdbcType=INTEGER},
+      </if>
+      <if test="inputuserid != null" >
+        #{inputuserid,jdbcType=CHAR},
+      </if>
+      <if test="inputdate != null" >
+        #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuserid != null" >
+        #{checkuserid,jdbcType=CHAR},
+      </if>
+      <if test="checkdate != null" >
+        #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.CustPayee" >
+    update cust_payee
+    <set >
+      <if test="custid != null" >
+        custId = #{custid,jdbcType=CHAR},
+      </if>
+      <if test="cashpayment != null" >
+        cashPayment = #{cashpayment,jdbcType=INTEGER},
+      </if>
+      <if test="payaccount != null" >
+        payAccount = #{payaccount,jdbcType=CHAR},
+      </if>
+      <if test="incomemoney != null" >
+        incomeMoney = #{incomemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="calculaterebate != null" >
+        calculateRebate = #{calculaterebate,jdbcType=INTEGER},
+      </if>
+      <if test="inputuserid != null" >
+        inputUserId = #{inputuserid,jdbcType=CHAR},
+      </if>
+      <if test="inputdate != null" >
+        inputDate = #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuserid != null" >
+        checkUserId = #{checkuserid,jdbcType=CHAR},
+      </if>
+      <if test="checkdate != null" >
+        checkDate = #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        orgId = #{orgid,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.CustPayee" >
+    update cust_payee
+    set custId = #{custid,jdbcType=CHAR},
+      cashPayment = #{cashpayment,jdbcType=INTEGER},
+      payAccount = #{payaccount,jdbcType=CHAR},
+      incomeMoney = #{incomemoney,jdbcType=DECIMAL},
+      calculateRebate = #{calculaterebate,jdbcType=INTEGER},
+      inputUserId = #{inputuserid,jdbcType=CHAR},
+      inputDate = #{inputdate,jdbcType=TIMESTAMP},
+      checkUserId = #{checkuserid,jdbcType=CHAR},
+      checkDate = #{checkdate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      orgId = #{orgid,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where invoiceId = #{invoiceid,jdbcType=CHAR}
+  </update>
+  
+   <select id="getList" resultType="com.sise.pojo.CustPayee">
+    select * from cust_payee;
+  </select>
+  
+  <select id="findPaymentByCust" parameterType="Map"  resultType="com.sise.pojo.CustPayee">
+    select * from cust_payee 
+    <where>
+     <if test="custid != null" >
+        custId = #{custid}
+      </if>
+     </where>
+  </select>
+</mapper>

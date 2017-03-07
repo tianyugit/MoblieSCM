@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.action.extension" value="do" />
+	<constant name="struts.devMode" value="false"></constant>
+	<!-- 替换默认的产生动作类实例的工厂为Spring的 -->
+<!-- 	<constant name="struts.objectFactory" value="spring"></constant> -->
+	<package name="supplier" namespace="/" extends="struts-default">
+	 <interceptors>
+		<interceptor name="loginInterceptor" class="com.sise.Interceptor.LoginInterceptor">
+		 <param name="allowAction">start,userManage_addUser,login,userLogin,logout,regist,warn,warn2,home</param>
+		</interceptor>
+		
+		<interceptor-stack name="loginStack">
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="loginInterceptor"/>
+		</interceptor-stack>
+	</interceptors>
+
+	<default-interceptor-ref name="loginStack"/>
+	
+	<global-results>
+		<result name="login">/WEB-INF/jsp/user_login.jsp</result>
+	</global-results> 
+		<!-- <action name="welcome">
+			<result>/WEB-INF/jsp/MyJsp.jsp</result>
+		</action>
+		<action name="showname"
+			class="com.test.action.TestAction">
+			<result name="ret">/WEB-INF/jsp/index2.jsp</result>
+		</action> -->
+		<!--基础管理  -->
+		<action name="supplierType_*" class="com.sise.action.SupplierTypeManageAction" method="{1}">
+			<result name="edit">/WEB-INF/jsp/supplier/supplier_type_edit.jsp</result>
+			<result name="add">/WEB-INF/jsp/supplier/supplier_type_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/supplier/supplier_type_list.jsp</result> 	
+		</action>
+		
+		<action name="supplier_*" class="com.sise.action.SupplierManageAction" method="{1}">
+			<result name="edit">/WEB-INF/jsp/supplier/supplier_edit.jsp</result>
+			<result name="add">/WEB-INF/jsp/supplier/supplier_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/supplier/supplier_list.jsp</result> 	
+		</action>
+		
+		<action name="accessoryType_*" class="com.sise.action.AccessoryTypeManageAction" method="{1}">
+			<result name="edit">/WEB-INF/jsp/basic/accessoryType_edit.jsp</result>
+			<result name="add">/WEB-INF/jsp/basic/accessoryType_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/basic/accessoryType_list.jsp</result> 	
+		</action>
+		
+		<action name="mobType_*" class="com.sise.action.MobTypeManageAction" method="{1}">
+			<result name="edit">/WEB-INF/jsp/basic/mobtype_edit.jsp</result>
+			<result name="add">/WEB-INF/jsp/basic/mobtype_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/basic/mobtype_list.jsp</result> 	
+			<result name="viewBonus">/WEB-INF/jsp/basic/mobtype_bonus.jsp</result> 	
+		</action>
+		
+		<action name="bonusType_*" class="com.sise.action.BonusTypeManageAction" method="{1}">
+			<result name="edit">/WEB-INF/jsp/basic/bonus_edit.jsp</result>
+			<result name="add">/WEB-INF/jsp/basic/bonus_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/basic/bonus_list.jsp</result> 	
+		</action>
+		
+		<action name="custType_*" class="com.sise.action.CustomerTypeManageAction" method="{1}">
+			<result name="edit">/WEB-INF/jsp/customer/custtype_edit.jsp</result>
+			<result name="add">/WEB-INF/jsp/customer/custtype_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/customer/custtype_list.jsp</result> 	
+		</action>
+		
+		<action name="cust_*" class="com.sise.action.CustomerManageAction" method="{1}">
+			<result name="edit">/WEB-INF/jsp/customer/cust_edit.jsp</result>
+			<result name="add">/WEB-INF/jsp/customer/cust_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/customer/cust_list.jsp</result> 	
+		</action>
+		
+		<action name="brand_*" class="com.sise.action.BrandManageAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/basic/brand.jsp</result>
+			<!--  <result name="succ" type="redirect">brand_list.do</result> --> 	
+			<!--  <result name="success" type="redirect">brand_list.do</result> -->
+		</action>
+		
+		<action name="color_*" class="com.sise.action.ColorManageAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/basic/color.jsp</result>
+		</action>
+		
+		<action name="config_*" class="com.sise.action.ConfigManageAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/basic/config.jsp</result>
+		</action>
+		
+		<action name="account_*" class="com.sise.action.AccountManageAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/basic/account_list.jsp</result>
+			<result name="add">/WEB-INF/jsp/basic/account_add.jsp</result>
+			<result name="edit">/WEB-INF/jsp/basic/account_edit.jsp</result>
+		</action>
+		
+		<!-- 供应商业务 -->
+		<action name="mobStockIn_*" class="com.sise.action.sup.MobStockInManageAction" method="{1}">
+			<result name="edit">/WEB-INF/jsp/supplier/mobStockIn_edit.jsp</result>
+			<result name="add">/WEB-INF/jsp/supplier/mobStockIn_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/supplier/mobStockIn_list.jsp</result> 	
+			<result name="detail">/WEB-INF/jsp/supplier/mobStock_detail.jsp</result>
+		</action>
+		<action name="mobReturn_*" class="com.sise.action.sup.MobReturnManageAction" method="{1}">
+			<result name="edit">/WEB-INF/jsp/supplier/mobReturn_edit.jsp</result>
+			<result name="add">/WEB-INF/jsp/supplier/mobReturn_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/supplier/mobReturn_list.jsp</result>
+			<result name="detail">/WEB-INF/jsp/supplier/mobReturn_detail.jsp</result> 	
+		</action>
+		<action name="pay_*" class="com.sise.action.sup.PayManageAction" method="{1}">
+			<result name="add">/WEB-INF/jsp/supplier/pay_add.jsp</result>
+			<result name="edit">/WEB-INF/jsp/supplier/pay_edit.jsp</result>
+			<result name="list">/WEB-INF/jsp/supplier/pay_list.jsp</result> 	
+		</action>
+		<action name="tradeDetail_*" class="com.sise.action.sup.TradeDetailManageAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/supplier/tradeDetail_list.jsp</result> 	
+		</action>
+		
+		<action name="accessoryStockIn_*" class="com.sise.action.sup.AccStockInManageAction" method="{1}">
+			<result name="add">/WEB-INF/jsp/supplier/accessoryStockIn_add.jsp</result>
+			<result name="list">/WEB-INF/jsp/supplier/accessoryStockIn_list.jsp</result> 	
+			<result name="detail">/WEB-INF/jsp/supplier/accStock_detail.jsp</result>
+		</action>
+	
+		<!--库存业务  -->
+			<action name="mobStock_*" class="com.sise.action.stock.MobStockManageAction" method="{1}">
+			<result name="detail">/WEB-INF/jsp/sto/mobStockDetail.jsp</result>
+			<result name="list">/WEB-INF/jsp/sto/mobStockView.jsp</result> 	
+		</action>
+		<action name="accStock_*" class="com.sise.action.stock.AccStockManageAction" method="{1}">
+			<result name="detail">/WEB-INF/jsp/sto/accStockDetail.jsp</result>
+			<result name="list">/WEB-INF/jsp/sto/accStockView.jsp</result> 	
+		</action>
+		<!-- 客户业务 -->
+		<action name="custSale_*" class="com.sise.action.cust.CustSaleManageAction" method="{1}">
+			<result name="add">/WEB-INF/jsp/customer/custSale_add.jsp</result>
+			<result name="edit">/WEB-INF/jsp/customer/custSale_edit.jsp</result>
+			<result name="list">/WEB-INF/jsp/customer/custSale_list.jsp</result>
+			<result name="detail">/WEB-INF/jsp/customer/custSale_detail.jsp</result>
+		</action>
+		<action name="custTradeDetail_*" class="com.sise.action.cust.CustTradeDetailManageAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/customer/custTradeDetail_list.jsp</result>
+		</action>
+		
+		<action name="payee_*" class="com.sise.action.cust.PayeeManageAction" method="{1}">
+			<result name="add">/WEB-INF/jsp/customer/payee_add.jsp</result>
+			<result name="edit">/WEB-INF/jsp/customer/payee_edit.jsp</result>
+			<result name="list">/WEB-INF/jsp/customer/payee_list.jsp</result> 	
+		</action>
+
+	</package>
+</struts>

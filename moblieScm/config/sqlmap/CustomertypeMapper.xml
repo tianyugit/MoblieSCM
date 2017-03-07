@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="customertypeMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.Customertype" >
+    <id column="custTypeId" property="custtypeid" jdbcType="VARCHAR" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="custTypeName" property="custtypename" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+   <sql id="Base_Column_List" >
+    custTypeId, discount, custTypeName, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_customertype
+    where custTypeId = #{custtypeid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bas_customertype
+    where custTypeId = #{custtypeid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.Customertype" >
+    insert into bas_customertype (custTypeId, discount, custTypeName, 
+      remark)
+    values (#{custtypeid,jdbcType=VARCHAR}, #{discount,jdbcType=DECIMAL}, #{custtypename,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.Customertype" >
+    insert into bas_customertype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="custtypeid != null" >
+        custTypeId,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="custtypename != null" >
+        custTypeName,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="custtypeid != null" >
+        #{custtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="custtypename != null" >
+        #{custtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.Customertype" >
+    update bas_customertype
+    <set >
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="custtypename != null" >
+        custTypeName = #{custtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where custTypeId = #{custtypeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.Customertype" >
+    update bas_customertype
+    set discount = #{discount,jdbcType=DECIMAL},
+      custTypeName = #{custtypename,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where custTypeId = #{custtypeid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getTypeList" resultType="com.sise.pojo.Customertype">
+  select *  from bas_customertype;
+  </select>
+</mapper>

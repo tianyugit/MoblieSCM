@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="color" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.Color" >
+    <id column="color" property="color" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="Map" >
+    delete from bas_color
+    where color = #{color,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.Color" >
+    insert into bas_color (color)
+    values (#{color,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.Color" >
+    insert into bas_color
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="color != null" >
+        color,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="findColorByPrimaryKey" parameterType="Map" resultType="com.sise.pojo.Color">
+  	select * from bas_color where color = #{color,jdbcType=VARCHAR}
+  </select>
+  <select id="queryList" resultType="com.sise.pojo.Color">
+  	select * from bas_color;
+  </select>
+  
+</mapper>

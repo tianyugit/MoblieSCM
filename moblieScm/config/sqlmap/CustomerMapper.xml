@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="customerMapper" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.Customer" >
+    <id column="custId" property="custid" jdbcType="VARCHAR" />
+    <result column="custName" property="custname" jdbcType="VARCHAR" />
+    <!-- <result column="custTypeId" property="custtypeid" jdbcType="VARCHAR" /> -->
+    <result column="linkman" property="linkman" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="fax" property="fax" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <association property="customerType" javaType="com.sise.pojo.Customertype">
+		<id property="custtypeid" column="custTypeId"/>
+		<result property="custtypename" column="custTypeName"/>
+		<result property="remark" column="remark"/>
+   </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    custId, custName, custTypeId, linkman, tel, email, address, fax, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_customer
+    where custId = #{custid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bas_customer
+    where custId = #{custid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.Customer" >
+    insert into bas_customer (custId, custName, custTypeId, 
+      linkman, tel, email, 
+      address, fax, remark
+      )
+    values (#{custid,jdbcType=VARCHAR}, #{custname,jdbcType=VARCHAR}, #{customerType.custtypeid,jdbcType=VARCHAR}, 
+      #{linkman,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.Customer" >
+    insert into bas_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="custid != null" >
+        custId,
+      </if>
+      <if test="custname != null" >
+        custName,
+      </if>
+      <if test="custtypeid != null" >
+        custTypeId,
+      </if>
+      <if test="linkman != null" >
+        linkman,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="fax != null" >
+        fax,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="custid != null" >
+        #{custid,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="customerType.custtypeid != null" >
+        #{customerType.custtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.Customer" >
+    update bas_customer
+    <set >
+      <if test="custname != null" >
+        custName = #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="customerType.custtypeid != null" >
+        custTypeId = #{customerType.custtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where custId = #{custid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.Customer" >
+    update bas_customer
+    set custName = #{custname,jdbcType=VARCHAR},
+      custTypeId = #{customerType.custtypeid,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where custId = #{custid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getCustomerList" parameterType="Map" resultMap="BaseResultMap">
+  	select * from bas_customer where custTypeId='${custtypeid}'
+  </select>
+  
+  <select id="queryList"  resultMap="BaseResultMap">
+  	select * from bas_customer
+  </select>
+  
+  <select id="findCustomer" resultMap="BaseResultMap">
+  	select * from bas_customer
+  	<where>
+  		<if test="custname != ''" >
+          and custName LIKE #{custname}
+       </if>
+  		 <if test="custtypeid != ''" >
+          and custTypeId LIKE #{custtypeid}
+      </if>
+  	</where>
+  	
+  </select>
+  
+  <select id="findCust" parameterType="Map" resultType="com.sise.pojo.JsonBean">
+  	select custId as id, custName as text from bas_customer where custName LIKE #{custname}
+  </select>
+  
+  <select id="findCustByName" parameterType="String" resultMap="BaseResultMap">
+  	select * from bas_customer where custName = #{custName,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="findAllWithFy" parameterType="map"  resultMap="BaseResultMap">
+		select * from bas_customer
+		<!-- <where>
+  		<if test="custname != ''" >
+          and custName LIKE #{custname}
+       </if>
+  		 <if test="custtypeid != null" >
+          and custTypeId LIKE #{custtypeid}
+      </if>
+  	</where> -->
+		 limit #{pstart},#{psize}
+	</select>
+	
+	<select id="getPageLong" resultType="Integer">
+		select count(*) from bas_customer;
+	</select>
+</mapper>

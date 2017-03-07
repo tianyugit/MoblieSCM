@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="supplierType" >
+  <resultMap id="BaseResultMap" type="com.sise.pojo.SupplierType" >
+    <id column="supTypeId" property="suptypeid" jdbcType="VARCHAR" />
+    <result column="supTypeName" property="suptypename" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    supTypeId, supTypeName, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_suppliertype
+    where supTypeId = #{suptypeid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bas_suppliertype
+    where supTypeId = #{suptypeid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sise.pojo.SupplierType" >
+    insert into bas_suppliertype (supTypeId, supTypeName, remark
+      )
+    values (#{suptypeid,jdbcType=VARCHAR}, #{suptypename,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sise.pojo.SupplierType" >
+    insert into bas_suppliertype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="suptypeid != null" >
+        supTypeId,
+      </if>
+      <if test="suptypename != null" >
+        supTypeName,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="suptypeid != null" >
+        #{suptypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="suptypename != null" >
+        #{suptypename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sise.pojo.SupplierType" >
+    update bas_suppliertype
+    <set >
+      <if test="suptypename != null" >
+        supTypeName = #{suptypename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supTypeId = #{suptypeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sise.pojo.SupplierType" >
+    update bas_suppliertype
+    set supTypeName = #{suptypename,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where supTypeId = #{suptypeid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getTypeList" resultType="com.sise.pojo.SupplierType">
+  select *  from bas_suppliertype;
+  </select>
+</mapper>

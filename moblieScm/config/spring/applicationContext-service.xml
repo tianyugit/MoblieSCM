@@ -1,0 +1,102 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd ">
+
+
+<bean id="testService" 
+		class="com.test.service.TestServiceImpl">
+	</bean>
+	<bean id="userManageService" class="com.sise.service.UserManageServiceImpl">
+	 <property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean id="supplierService" class="com.sise.service.SupplierServiceImpl">
+	 <property name="supplierDao" ref="supplierDao"></property>
+	</bean>
+	<bean id="supplierTypeService" class="com.sise.service.SupplierTypeServiceImpl">
+	 <property name="supplierTypeDao" ref="supplierTypeDao"></property>
+	</bean>
+	<bean id="mobTypeService" class="com.sise.service.MobTypeServiceImpl">
+	 <property name="mobtypeDao" ref="mobtypeDao"></property>
+	 <property name="mobtonusDao" ref="mobtonusDao"></property>
+	 <property name="bonusTypeDao" ref="bonustypeDao"></property>
+	</bean>
+	<bean id="customertypeService" class="com.sise.service.CustomertypeServiceImpl">
+	 <property name="customertypeDao" ref="customertypeDao"></property>
+	</bean>
+	<bean id="customerService" class="com.sise.service.CustomerServiceImpl">
+	 <property name="customerDao" ref="customerDao"></property>
+	</bean>
+	<bean id="accessoryTypeService" class="com.sise.service.AccessoryTypeServiceImpl">
+	 <property name="accessorytypeDao" ref="accessorytypeDao"></property>
+	</bean>
+	
+	<!-- 供应商业务 -->
+	<bean id="mobStockInService" class="com.sise.service.MobStockInServiceImpl">
+	 <property name="mobstockinDao" ref="mobstockinDao"></property>
+	 <property name="supTradedetailDao" ref="supTradedetailDao"></property>
+	 <property name="supStockinsnDao" ref="supStockinsnDao"></property>
+	 <property name="mobstockDao" ref="mobstockDao"></property>
+	</bean>
+	<bean id="accstockinService" class="com.sise.service.AccstockinServiceImpl">
+	 <property name="accstockinDao" ref="accstockinDao"></property>
+	 <property name="supTradedetailDao" ref="supTradedetailDao"></property>
+	 <property name="snstockDao" ref="snstockDao"></property>
+	 <property name="accstockDao" ref="accstockDao"></property>
+	</bean>
+	<bean id="paymentService" class="com.sise.service.PaymentServiceImpl">
+	 <property name="paymentDao" ref="paymentDao"></property>
+	 <property name="accountDao" ref="accountDao"></property>
+	</bean>
+	<bean id="mobReturnService" class="com.sise.service.MobReturnServiceImpl">
+	<property name="mobreturnDao" ref="mobreturnDao"></property>
+	 <property name="supTradedetailDao" ref="supTradedetailDao"></property>
+	 <property name="mobstocksnoutDao" ref="mobstocksnoutDao"></property>
+	 <property name="mobstockDao" ref="mobstockDao"></property>
+	</bean>
+	
+	<!-- 客户业务 -->
+	<bean id="custMobsaleService" class="com.sise.service.cust.CustMobsaleServiceImpl">
+	<property name="custMobsaleDao" ref="custMobsaleDao"></property>
+	 <property name="custMobsalesnDao" ref="custMobsalesnDao"></property>
+	 <property name="custTradedetailDao" ref="custTradedetailDao"></property>
+	 <property name="mobstockDao" ref="mobstockDao"></property>
+	</bean>
+	
+	<bean id="payeeService" class="com.sise.service.cust.PayeeServiceImpl">
+	 <property name="custPayeeDao" ref="custPayeeDao"></property>
+	 <property name="accountDao" ref="accountDao"></property>
+	</bean>
+	
+	<!-- #############5. Spring声明式事务管理配置############### -->
+	<!-- 5.1 配置事务管理器类 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 5.2 配置事务增强(如果管理事务?) -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="find*" read-only="true"/>
+			<tx:method name="*" read-only="false"/>
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 5.3 Aop配置： 拦截哪些方法(切入点表表达式) + 应用上面的事务增强配置 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.sise.service.MobStockInService.*())" id="pt"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pt"/>
+	</aop:config>
+	
+</beans>
